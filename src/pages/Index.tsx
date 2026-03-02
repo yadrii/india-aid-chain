@@ -1,14 +1,13 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { UserRole } from "@/lib/mockData";
+import LoginPage from "@/components/LoginPage";
+import Dashboard from "@/components/Dashboard";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [role, setRole] = useState<UserRole | null>(null);
+
+  if (!role) return <LoginPage onLogin={setRole} />;
+  return <Dashboard role={role} onLogout={() => setRole(null)} />;
 };
 
 export default Index;
